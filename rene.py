@@ -4,7 +4,7 @@ from discord.ext.commands   import Bot
 import asyncio
 import random
 
-TOKEN = "NTU3OTA5MDUzNjQ1NTIwODk3.XKKYAQ.8NaBnAE7Gl68NJHn6kHitxZM_oc"
+TOKEN = "NTU3OTA5MDUzNjQ1NTIwODk3.XKKYFQ.b-TPDDflppOZnTsnBnMeaoV2QWQ"
 
 bot = commands.Bot(command_prefix='!')
 client = discord.Client()
