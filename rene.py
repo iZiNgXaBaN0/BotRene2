@@ -101,7 +101,7 @@ async def on_message(message):
           await bot.remove_reaction(message, "😡")
 
 
-        malade = ["malade", "malades", "Malade", "Malades", "MALADE", "MALDES"]
+        malade = ["malade", "malades", "Malade", "Malades", "MALADE", "MALADES"]
         for x in malade:
             if x in message.content:
               if message.author != bot.user:
