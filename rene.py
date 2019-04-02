@@ -3,9 +3,9 @@ from discord.ext    import commands
 from discord.ext.commands   import Bot
 import asyncio
 import random
-import re
+import os
 
-TOKEN = "NTU3OTA5MDUzNjQ1NTIwODk3.D3mpSg.DVTHlcKOEESVVFSTq2Ny3j7YmnQ"
+token = os.environ.get("api_key")
 
 bot = commands.Bot(command_prefix='!')
 client = discord.Client()
@@ -293,20 +293,4 @@ Je sais pas et je m'en fous.''',
           x = x+1
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-bot.run(TOKEN)
+bot.run(token)
