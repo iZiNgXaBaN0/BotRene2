@@ -3,8 +3,9 @@ from discord.ext    import commands
 from discord.ext.commands   import Bot
 import asyncio
 import random
+import re
 
-TOKEN = "NTU3OTA5MDUzNjQ1NTIwODk3.XKKYFQ.b-TPDDflppOZnTsnBnMeaoV2QWQ"
+TOKEN = "NTU3OTA5MDUzNjQ1NTIwODk3.D3mpSg.DVTHlcKOEESVVFSTq2Ny3j7YmnQ"
 
 bot = commands.Bot(command_prefix='!')
 client = discord.Client()
@@ -101,14 +102,7 @@ async def on_message(message):
           await bot.remove_reaction(message, "😡")
 
 
-        malade = ["malade", "malades", "Malade", "Malades", "MALADE", "MALADES"]
-        for x in malade:
-            if x in message.content:
-              if message.author != bot.user:
-               await bot.add_reaction(message, "🤢")
-               msg = "Sorry {0.author.mention}, rétablis-toi bien. Je suis sûr que tu vas surmonter ça. YOU CAN DO IT !!!".format(message)
-               await bot.send_message(message.channel, msg)
-               x = x+1
+        
 
         bigre = ["bigre", "Bigre", "BIGRE"]
         for x in bigre:
@@ -154,7 +148,7 @@ async def on_message(message):
               x = x+1
 
 
-        goldhawk = ["Gold Hawk", "gold hawk", "Gold hawk", "GOLD HAWK"]
+        goldhawk = ["Gold Hawk", "gold hawk", "Gold hawk", "GOLD HAWK", "GoldHawk", "goldhawk", "Goldhawk", "GOLDHAWK"]
         for x in goldhawk:
           if x in message.content:
             if message.author != bot.user:
@@ -272,7 +266,16 @@ Je sais pas et je m'en fous.''',
         if message.author != bot.user:
           await bot.add_reaction(message, "😡")
           x = x+1
+   
 
+    malade = ["malade", "malades", "Malade", "Malades", "MALADE", "MALADES"]
+    for x in malade:
+        if x in message.content:
+          if message.author != bot.user:
+            await bot.add_reaction(message, "🤢")
+            msg = "Sorry {0.author.mention}, rétablis-toi bien. Je suis sûr que tu vas surmonter ça. YOU CAN DO IT !!!".format(message)
+            await bot.send_message(message.channel, msg)
+            x = x+1
 
 
   # Juste le channel YES
