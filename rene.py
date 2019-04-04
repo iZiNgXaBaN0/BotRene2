@@ -78,7 +78,7 @@ async def on_message(message):
           variable = (
             "Très bien et toi {0.author.mention} ?".format(message),
             "Nope, j'ai fait la teuf hier soir, j'ai un peu la 🤢, là…",
-            "Yeah !! C'est la teuf :A_party:396958116605984778 !",
+            "Yeah !! C'est la teuf 🥳 !",
             "Chuut ! Je 😴...",
             "Bof, je suis fauché… T'as pas 10 balles ? 😋"
             "Chuis pas là, j'ai aqua-poney 😈",
