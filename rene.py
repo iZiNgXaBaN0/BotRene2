@@ -34,9 +34,10 @@ async def falcoday():
 
 client.loop.create_task(falcoday())
 
-
-
-
+@bot.command()
+async def blague(message):
+    jokes = open("jokes.txt", "r", encoding = "utf-8").read().split("\n---\n")
+    bot.say(random.choice(jokes))
 
 @bot.event
 async def on_message(message):
@@ -129,104 +130,6 @@ async def on_message(message):
               await bot.send_message(message.channel, "Notre grand maître à tous")
               x = x+1
 
-
-
-        blague = ["!blague", "blague"]
-        for x in blague:
-         if x in message.content:
-          if message.author != bot.user:
-            variable2 = (
-'''Quelle est la plus intelligente, la blonde, la rousse ou la brune ? **La rousse parce que c’est un dictionnaire.**''',
-
-'''Un chien et un homme son sur un bateau. Le chien pète, l'homme tombe à l'eau et se noie. Quelle est la race du chien ? Un pékinois. (un pet qui noie)''',
-
-'''Je suis inquiet, je vois des points noirs.
-- Tu a vu l'oculiste ?
-- Non, des points noirs !''',
-
-'''Une femme discute avec une amie :
-- "J'ai un mari en or."
- L'autre lui répond :
-- "moi, le mien, il est en taule."''',
-
-'''Sur le bord du Nil, trois gars voyant un crocodile dans l'eau se mettent à lui jeter des cailloux. À un moment, le crocodile, en colère, s'approche de la rive, prêt à monter sur la berge. Deux des gars se sauvent et montent dans un arbre. Le troisième, impassible, ne bouge pas. Les autres l'appellent et lui disent de se sauver. Alors l'autre leur répond : Ben pourquoi ? J'ai pas jeté de cailloux moi !''',
-
-'''Un gars dit à un autre dans un troquet :
-- T'es con toi ! T'es vraiment con ! C'est pas possible ce que t'es con ! J'ai jamais vu un con pareil ! Tiens, c'est simple, s'il existait un concours de cons, tu finirais deuxième !
-- Pourquoi deuxième ?
-- Parce que t'es trop con pour finir premier !''',
-
-'''À la maternité un nouveau père, inquiet, demande à la sage-femme:
-- Trouvez-vous que mon fils me ressemble ?
-- Oui, mais c'est pas grave, l'essentiel c'est qu'il soit en bonne santé''',
-
-'''Que dit Frodon devant sa maison?
-C'est là que j'hobbit...''',
-
-'''Qu'est-ce qui est vert et qui pousse sous l'eau ?
-**Un chou marin**''',
-
-'''Au cinéma, deux bavardes n’arrêtent pas de discuter. Excédé, leur voisin proteste :
-- S’il vous plaît, je n’entends rien du tout.
-- Et alors, ça vous regarde, ce qu'on raconte ?''',
-
-'''Sur une petite île perdue au milieu de l'océan, un homme barbu agite désespérément les bras en direction d'un bateau. Sur le pont, un passager demande au capitaine :
-- Qui est-ce...?
-- Aucune idée. On passe tous les ans devant son île, et à chaque fois ça le rend fou !''',
-
-'''- Allô Police ! Je viens d'écraser un poulet. Que dois-je faire ?
-- Plumez-le et faites-le cuire…
-- Ah bon ! Et qu'est-ce que je fais de la moto ?''',
-
-
-'''- Bonjour, avez-vous amené au zoo le pingouin que vous avez trouvé dans la rue ?
-- Oui, il a bien aimé, mais aujourd'hui on va au cinéma.''',
-
-
-'''- J'ai aperçu ta copine l'autre jour, mais elle ne m'a pas vu !
-- Je sais, elle me l'a dit.''',
-
-'''Deux puces sortent du cinéma, l'une dit à l'autre :
-- On rentre à pied ou on prend un chien ?''',
-
-'''Un type voit un agent dans la rue et lui demande, tout rouge et essoufflé :
-- Pardon monsieur l'agent, vous n'avez pas vu passer un camion de singes ?
-- Pourquoi ? Vous êtes tombé ?''',
-
-'''C'est quoi un canife ?
-- Un petit fien.''',
-
-'''Le Père Noël est le seul barbu qui peut survoler les États-Unis sans problème.''',
-
-'''- Pilote à contrôle... pilote à contrôle... Je suis à 300 miles des côtes... 600 pieds au-dessus de l'eau... et à cours de carburant... qu'est-ce que je fais ?
-- Contrôle à pilote... contrôle à pilote... répétez après moi : Notre Père qui est aux Cieux...''',
-
-'''Dans un restaurant, un client dit :
-- Garçon, que fait cette mouche dans ma soupe ?
-- Je pense que c'est de la brasse... mais je peux me tromper...''',
-
-'''En croisière dans l'Atlantique, le capitaine prend le micro et annonce aux 2 000 passagers :
-- Mesdames et messieurs, j'ai une bonne et une mauvaise nouvelle à vous annoncer. Par laquelle je commence ?
-Les gens veulent la bonne... Alors le capitaine répond :
-- Nous allons gagner onze oscars...''',
-
-'''Des deux maux qui frappent notre siècle, lequel est le plus terrible, l'ignorance ou l'apathie ?
-Je sais pas et je m'en fous.''',
-
-'''Un asticot rencontre un autre asticot
-- Ça va ?
-- Ouais ! J'ai la pêche !''',
-
-'''Qu'est-ce qui est rouge avec des bandes blanches et qui sort de la pelouse à 200 km/h ?
-**Une taupe en Ferrari.**''',
-
-'''- T'aimes bien manger épicé ?
-- En même temps ?''',
-
-            )
-            await bot.send_message(message.channel, (random.choice(variable2)))
-            x = x+1
-
   #  Juste le channel GRR
 
 
@@ -265,6 +168,8 @@ Je sais pas et je m'en fous.''',
         if message.author != bot.user:
           await bot.add_reaction(message, "😄")
           x = x+1
+
+  await bot.process_commands(message)
 
 
 bot.run(token)
