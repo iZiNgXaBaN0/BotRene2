@@ -52,6 +52,10 @@ async def react(message):
             return True
     return False
 
+@bot.command()  
+async def code():
+    await bot.say("Voici le code du BOT : https://github.com/Eowalim/BotRene2 et merci à QUATRE de m'avoir aidé et compacté le code 🎇 !")
+
 @bot.event
 async def on_message(message):
 
