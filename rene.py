@@ -1,6 +1,6 @@
 import discord
-from discord.ext    import commands
-from discord.ext.commands   import Bot
+from discord.ext import commands
+from discord.ext.commands import Bot
 import asyncio
 import random
 import os
@@ -17,33 +17,8 @@ async def on_ready():
   print (" - Name: " + bot.user.name)
   print (" - ID: " + bot.user.id)
   while not client.is_closed:
-        jeux = (
-          "réinstaller son OS",
-          "réinstaller Eowalim",
-          "repeindre la chambre d'Eowalim",
-          "souhaiter la fête des pères à Eowalim",
-          "bugger pour embêter Eowalim",
-          "dézinguer du zombie",
-          "chercher son bot-sœur",
-          "regarder Terraria",
-          "Me Soûle Pas 3",
-          "faire la sieste",
-          "se débarrasser de Google",
-          "ramasser des bigorneaux",
-          "tu m'vois, tu m'vois pas",
-          "installer TOR",
-          "Banal Fantasy XXXIV",
-          "Rambo Six : Tabouret",
-          "Terrariarghh",
-          "construire un mur",
-          "chercher Mona",
-          "grinder le wither boss",
-          "chercher Excalibur",
-          "déjeuner avec King Knight",
-          
-        )
-        rjeux = random.choice(jeux)
-        await bot.change_presence(game=discord.Game(name=rjeux))
+        jeu = random.choice([line.strip() for line in open("games.txt", "r", encoding = "utf-8").readlines()])
+        await bot.change_presence(game = discord.Game(name = jeu))
         await asyncio.sleep(10800)
 
 client.loop.create_task(on_ready())
@@ -54,9 +29,8 @@ async def falcoday():
     await client.wait_until_ready()
     while not client.is_closed:
         channel = client.get_channel("562392613932630076")
-        time = [86400, 172800, 259200, 345600, 432000, 518400, 604800] # 1j / 2j / 3j / 4j/ 5j / 6j/ 7j
         await client.send_message(channel, "Aujourd'hui c'est **Falconia Day** ! Joyeux **Falconia Day** à tous !")
-        await asyncio.sleep(random.choice(time))
+        await asyncio.sleep(random.randint(1, 7) * 86400) # 1-7 jours
 
 client.loop.create_task(falcoday())
 
