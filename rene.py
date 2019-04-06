@@ -26,8 +26,7 @@ async def on_ready():
         await asyncio.sleep(10800)
 
 client.loop.create_task(on_ready())
-
-     
+ 
 @client.event
 async def falcoday():
     await client.wait_until_ready()
@@ -39,9 +38,9 @@ async def falcoday():
 client.loop.create_task(falcoday())
 
 @bot.command()
-async def blague(message):
+async def blague():
     jokes = open("jokes.txt", "r", encoding = "utf-8").read().split("\n---\n")
-    bot.say(random.choice(jokes))
+    await bot.say(random.choice(jokes))
 
 async def react(message):
     for mr in messages_reactions:
@@ -55,6 +54,9 @@ async def react(message):
 
 @bot.event
 async def on_message(message):
+
+    if message.author.bot:
+        return
 
     has_reacted = False
     
@@ -73,6 +75,5 @@ async def on_message(message):
             await bot.add_reaction(message, "😄")
 
     await bot.process_commands(message)
-
 
 bot.run(token)
