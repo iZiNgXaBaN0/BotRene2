@@ -51,7 +51,7 @@ async def mariage(ctx):
     role = [role for role in ctx.message.server.roles if role.name == "Random"][0]
     eligibleMembers = [member for member in ctx.message.server.members if role in member.roles]
     random.shuffle(eligibleMembers)
-    await bot.say(f" René a décidé de lier a vie {eligibleMembers[0].name} et {eligibleMembers[1].name}")
+    await bot.say(f" René a décidé de lier a vie **{eligibleMembers[0].mention}** et **{eligibleMembers[1].mention}**")
 
 async def react(message):
     for mr in messages_reactions:
