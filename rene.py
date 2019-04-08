@@ -42,6 +42,17 @@ async def blague():
     jokes = open("jokes.txt", "r", encoding = "utf-8").read().split("\n---\n")
     await bot.say(random.choice(jokes))
 
+@bot.command()  
+async def code():
+    await bot.say("Voici le code du BOT : https://github.com/Eowalim/BotRene2 et merci à QUATRE de m'avoir aidé et compacté le code 🎇 !")
+    
+@bot.command(pass_context = True)
+async def mariage(ctx):
+    role = [role for role in ctx.message.server.roles if role.name == "Random"][0]
+    eligibleMembers = [member for member in ctx.message.server.members if role in member.roles]
+    random.shuffle(eligibleMembers)
+    await bot.say(f"{eligibleMembers[0].name} + {eligibleMembers[1].name}")
+
 async def react(message):
     for mr in messages_reactions:
         if re.compile("(?i)" + mr["trigger"]).search(message.content) is not None:
@@ -51,10 +62,6 @@ async def react(message):
                 await bot.add_reaction(message, reaction)
             return True
     return False
-
-@bot.command()  
-async def code():
-    await bot.say("Voici le code du BOT : https://github.com/Eowalim/BotRene2 et merci à QUATRE de m'avoir aidé et compacté le code 🎇 !")
 
 @bot.event
 async def on_message(message):
