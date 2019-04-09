@@ -14,6 +14,7 @@ bot = commands.Bot(command_prefix='!')
 client = discord.Client()
 
 messages_reactions = json.load(open("messages_reactions.json", "r", encoding = "utf-8"))
+minesweeper_emojis = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
 @bot.event
 async def on_ready():
@@ -52,6 +53,35 @@ async def mariage(ctx):
     eligibleMembers = [member for member in ctx.message.server.members if role in member.roles]
     random.shuffle(eligibleMembers)
     await bot.say(f" René a décidé de lier a vie **{eligibleMembers[0].mention}** et **{eligibleMembers[1].mention}**")
+
+@bot.command()
+async def demineur(height : int = 12, width : int = 12, bombs : int = 30):
+    if any(not 1 < a < 41 for a in (width, height)) or bombs < 1:
+        await bot.say("Erreur : les dimensions de la grille doivent être comprises entre 2 et 40 inclus, et elle doit contenir au moins 1 bombe.")
+        return
+    if bombs > width * height - 1:
+        await bot.say("Erreur : la grille doit contenir au moins un espace libre !")
+        return
+    
+    board = [True] * bombs + [False] * (width * height - bombs)
+    random.shuffle(board)
+    board = [board[x:x + width] for x in range(0, len(board), width)]
+    
+    output = ""
+    for i, line in enumerate(board):
+        for j, square in enumerate(line):
+            if square:
+                output += "||:bomb:|| "
+            else:
+                sum = 0
+                for k in range(max(i - 1, 0), min(i + 2, len(board))):
+                    for l in range(max(j - 1, 0), min(j + 2, len(line))):
+                        sum += 1 if board[k][l] else 0
+                output += f"||:{minesweeper_emojis[sum]}:|| "
+        output += "\n"
+    
+    await bot.say(f"Dimensions : {width}x{height} ; Bombes : {bombs}")
+    await bot.say(output)
 
 async def react(message):
     for mr in messages_reactions:
