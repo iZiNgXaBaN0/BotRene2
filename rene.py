@@ -59,6 +59,9 @@ async def demineur(height : int = 12, width : int = 12, bombs : int = 30):
     if any(not 1 < a < 41 for a in (width, height)) or bombs < 1:
         await bot.say("Erreur : les dimensions de la grille doivent être comprises entre 2 et 40 inclus, et elle doit contenir au moins 1 bombe.")
         return
+    if width * height > 175:
+        await bot.say(f"Erreur : à cause de la limite de 2000 caractères, une grille ne peut contenir que maximum 175 cases ! ({width} * {height} = {width * height})")
+        return
     if bombs > width * height - 1:
         await bot.say("Erreur : la grille doit contenir au moins un espace libre !")
         return
@@ -71,13 +74,14 @@ async def demineur(height : int = 12, width : int = 12, bombs : int = 30):
     for i, line in enumerate(board):
         for j, square in enumerate(line):
             if square:
-                output += "||:bomb:|| "
+                output += "||:bomb:||"
             else:
                 sum = 0
                 for k in range(max(i - 1, 0), min(i + 2, len(board))):
                     for l in range(max(j - 1, 0), min(j + 2, len(line))):
                         sum += 1 if board[k][l] else 0
-                output += f"||:{minesweeper_emojis[sum]}:|| "
+                output += f"||:{minesweeper_emojis[sum]}:||"
+            output += " " if j < len(line) - 1 else ""
         output += "\n"
     
     await bot.say(f"Dimensions : {width}x{height} ; Bombes : {bombs}")
