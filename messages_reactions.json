@@ -82,5 +82,13 @@
         "reactions" : [
             "🤢"
         ]
+    },
+    {
+        "trigger" : "\\bnotre[-| ]dame\\b",
+        "possible_answers" : [
+        ],
+        "reactions" : [
+            ":VargLaugh:401154388791656449"
+        ]
     }
 ]
